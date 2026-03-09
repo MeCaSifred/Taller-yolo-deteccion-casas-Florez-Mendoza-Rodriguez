@@ -1,5 +1,5 @@
 from ultralytics import YOLO
-import os, shutil
+import os, shutil, glob
 
 def entrenar():
     print("\n Iniciando entrenamiento...")
@@ -26,13 +26,17 @@ def entrenar():
     )
 
     # Guardar pesos en models/
+import glob
+rutas = glob.glob('runs/**/*.pt', recursive=True)
+rutas = [r for r in rutas if 'best.pt' in r]
+if rutas:
+    mejor = max(rutas, key=os.path.getmtime)
     os.makedirs('models', exist_ok=True)
-    origen = 'runs/casas/weights/best.pt'
-    if os.path.exists(origen):
-        shutil.copy(origen, 'models/house-yolo.pt')
-        print("\n Pesos guardados en models/house-yolo.pt")
-    else:
-        print("\n No se encontró best.pt")
+    shutil.copy(mejor, 'models/house-yolo.pt')
+    print(f"\n Pesos copiados desde: {mejor}")
+    print(" Guardados en: models/house-yolo.pt")
+else:
+    print("\n No se encontró best.pt")
 
 if __name__ == "__main__":
     entrenar()
