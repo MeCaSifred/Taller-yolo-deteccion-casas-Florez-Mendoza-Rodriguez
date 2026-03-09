@@ -1,0 +1,12 @@
+train: C:\Users\PERSONAL\Documents\taller-yolo-deteccion-casas-Florez-Mendoza-Rodriguez\data\train\images
+val: C:\Users\PERSONAL\Documents\taller-yolo-deteccion-casas-Florez-Mendoza-Rodriguez\data\valid\images
+nc: 1
+names: ['House']
+
+
+roboflow:
+  workspace: humbertos-workspace
+  project: detectorcasas
+  version: 1
+  license: CC BY 4.0
+  url: https://universe.roboflow.com/humbertos-workspace/detectorcasas/dataset/1
